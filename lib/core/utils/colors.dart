@@ -1,10 +1,10 @@
 import 'dart:ui';
 
 class ColorsManager {
-  static const Color primaryColor = Color.fromRGBO(215,179,101,1);
-  static const Color goldColorO60 = Color.fromRGBO(215,179,101,0.61);
-  static const Color blackColor = Color.fromRGBO(3, 19, 20, 1);
-  static const Color BGColor = Color.fromRGBO(245, 245, 245, 1);
+  static const Color primaryColor = Color.fromRGBO(37, 150, 190,0.9);
+  static const Color lightPrimaryColor = Color.fromRGBO(233, 191, 178,0.7);
+  static const Color subTextBlackColor = Color.fromRGBO(143, 142, 142, 1.0);
+  static const Color BGColor = Color.fromRGBO(255, 255, 255, 0.9);
 
 
 }

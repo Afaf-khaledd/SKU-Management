@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "783863143751",
+    "project_id": "sku-management-2d348",
+    "storage_bucket": "sku-management-2d348.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:783863143751:android:514522b490951730608062",
+        "android_client_info": {
+          "package_name": "com.example.sku"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCkJnVD_nrBkGgs4HPhPkaEp14HviInGm8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
