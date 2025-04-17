@@ -19,4 +19,35 @@ class InputValidators {
     }
     return null;
   }
+
+  static String? validateName(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Branch name is required';
+    }
+    return null;
+  }
+
+  static String? validateLocation(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Location is required';
+    }
+    return null;
+  }
+
+  static String? validateManagerName(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Manager name is required';
+    }
+    return null;
+  }
+
+  static String? validatePhone(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Phone number is required';
+    }
+    if (value.length < 11) {
+      return 'Phone number must be at least 11 characters';
+    }
+    return null;
+  }
 }

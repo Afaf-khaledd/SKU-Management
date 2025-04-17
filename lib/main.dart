@@ -2,11 +2,14 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sku/features/Branches/data/repository/branchRepo.dart';
+import 'package:sku/features/Branches/presentation/logic/branch_bloc.dart';
 
 import 'core/utils/colors.dart';
 import 'core/utils/routers.dart';
 import 'features/Authentication/data/repository/authRepo.dart';
 import 'features/Authentication/presentation/logic/auth_bloc.dart';
+import 'features/Branches/presentation/logic/branch_event.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -27,6 +30,9 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider<AuthBloc>(
           create: (context) => AuthBloc(authRepository: AuthRepository()),
+        ),
+        BlocProvider<BranchBloc>(
+          create: (context) => BranchBloc(branchRepository: BranchRepository())..add(FetchBranches()),
         ),
 
       ],
