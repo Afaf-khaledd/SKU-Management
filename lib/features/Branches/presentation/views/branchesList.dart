@@ -17,13 +17,16 @@ class BranchesListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 100,
-        backgroundColor: Colors.transparent,
+        toolbarHeight: screenHeight*0.12,
+        backgroundColor: Color.fromRGBO(255, 255, 255, 1000),
         title: Text(
           "Branch List",
-          style: GoogleFonts.poppins(fontWeight: FontWeight.w600, fontSize: 25),
+          style: GoogleFonts.poppins(fontWeight: FontWeight.w600, fontSize: screenWidth*0.065),
         ),
         centerTitle: true,
         actions: [
@@ -44,7 +47,7 @@ class BranchesListScreen extends StatelessWidget {
             final branches = state.branches;
 
             if (branches.isEmpty) {
-              return const EmptyListView(title: 'No branches found.', icon: Icons.add_business_outlined, desc: "There's no branches yet,\nYou can add new branches easy!"); // good ui
+              return const EmptyListView(title: 'No branches founded.', icon: Icons.add_business_outlined, desc: "There's no branches yet,\nYou can add new branches easy!"); // good ui
             }
 
             return ListView.builder(

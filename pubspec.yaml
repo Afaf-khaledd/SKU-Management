@@ -36,19 +36,18 @@ dependencies:
   cupertino_icons: ^1.0.8
   google_fonts: ^6.2.1
   image_picker:
-  shared_preferences:
-  get_it:
+  flutter_barcode_scanner: ^2.0.0
+  qr_flutter:
+  permission_handler: ^11.3.1
+  fl_chart: ^0.69.2
   flutter_bloc:
   firebase_core: ^3.13.0
   firebase_auth: ^5.5.2
   cloud_firestore: ^5.6.6
-  #supabase
-  #dio:
-  http:
+  supabase_flutter:
   equatable:
   go_router: ^15.0.0
   shimmer:
-  fluttertoast:
   quickalert:
   awesome_bottom_bar: ^1.2.4
 

@@ -20,8 +20,14 @@ class _SplashScreenState extends State<SplashScreen>
       context.go('/onboarding');
     });
   }
+
   @override
   Widget build(BuildContext context) {
+
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+    final isSmallScreen = screenWidth < 600;
+
     return Scaffold(
       body: Center(
         child: Column(
@@ -30,18 +36,17 @@ class _SplashScreenState extends State<SplashScreen>
             Image.asset(
               AssetsManager.logo,
               fit: BoxFit.contain,
-              width: 200,
-              height: 200,
+              width: screenWidth * 0.5,
+              height: screenHeight * 0.3,
             ),
-            SizedBox(height: 20,),
             Text(
-              'SKU Management System',
+              'Inventura',
               style: GoogleFonts.poppins(
-                fontSize: 23,
+                fontSize: isSmallScreen ? 32 : 38,
                 fontStyle: FontStyle.italic,
                 fontWeight: FontWeight.w700,
-                color: Colors.black
-              )
+                color: Colors.black,
+              ),
             ),
           ],
         ),

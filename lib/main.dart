@@ -4,12 +4,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sku/features/Branches/data/repository/branchRepo.dart';
 import 'package:sku/features/Branches/presentation/logic/branch_bloc.dart';
+import 'package:sku/features/SKUs/data/repository/skuRepo.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'core/utils/colors.dart';
 import 'core/utils/routers.dart';
 import 'features/Authentication/data/repository/authRepo.dart';
 import 'features/Authentication/presentation/logic/auth_bloc.dart';
 import 'features/Branches/presentation/logic/branch_event.dart';
+import 'features/SKUs/presentation/logic/items_bloc.dart';
+import 'features/SKUs/presentation/logic/items_event.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -17,7 +21,10 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  //setupServiceLocator();
+  await Supabase.initialize(
+    url: 'https://eyxkovzsyebbysipriyt.supabase.co',
+    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV5eGtvdnpzeWViYnlzaXByaXl0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ5OTEyMzEsImV4cCI6MjA2MDU2NzIzMX0.ON5ZsG4zXFbaLtE8jYA2Ar3sBRGdxULoNjOGuh-HL8s',
+  );
   runApp(const MyApp());
 }
 
@@ -34,7 +41,9 @@ class MyApp extends StatelessWidget {
         BlocProvider<BranchBloc>(
           create: (context) => BranchBloc(branchRepository: BranchRepository())..add(FetchBranches()),
         ),
-
+        BlocProvider<ItemsBloc>(
+          create: (context) => ItemsBloc(itemsRepository: SKURepository())..add(LoadSKUs()),
+        ),
       ],
       child: MaterialApp.router(
         routerConfig: AppRouter.router,

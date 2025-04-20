@@ -51,15 +51,17 @@ class _BranchScreenState extends State<BranchScreen> {
   @override
   Widget build(BuildContext context) {
     final String screenTitle = widget.branch == null ? "Add Branch" : "Update Branch";
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
       appBar: AppBar(
         title: Text('Branch Management',
-          style: GoogleFonts.poppins(fontWeight: FontWeight.w600, fontSize: 25),
+          style: GoogleFonts.poppins(fontWeight: FontWeight.w600, fontSize: screenWidth*0.06),
         ),
         leading: IconButton(onPressed: ()=> context.pop(), icon: Icon(Icons.arrow_back_ios_rounded)),
-        toolbarHeight: 100,
-        backgroundColor: Colors.transparent,
+        toolbarHeight: screenHeight*0.12,
+        backgroundColor: Color.fromRGBO(255, 255, 255, 1000),
       ),
 
       body: BlocListener<BranchBloc, BranchState>(
@@ -69,24 +71,24 @@ class _BranchScreenState extends State<BranchScreen> {
               SnackBar(content: Text('Error: ${state.message}')),
             );
           } else if (state is BranchOperationSuccess) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Branch operation successful')),
-            );
             context.read<BranchBloc>().add(FetchBranches());
             context.pop();
           }
         },
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: EdgeInsets.symmetric(
+            horizontal: screenWidth * 0.05,
+            vertical: screenHeight * 0.03,
+          ),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   screenTitle,
-                  style: GoogleFonts.poppins(fontSize: 22, fontWeight: FontWeight.w600,color: Colors.grey[800]),
+                  style: GoogleFonts.poppins(fontSize: screenWidth*0.055, fontWeight: FontWeight.w600,color: Colors.grey[800]),
                 ),
-                const SizedBox(height: 45),
+                SizedBox(height: screenHeight*0.055),
                 Form(
                   key: _formKey,
                   child: Column(
@@ -94,34 +96,34 @@ class _BranchScreenState extends State<BranchScreen> {
                       CustomWhiteTextField(
                         controller: _nameController,
                         hintText: 'Branch Name',
-                        icon: Icons.business_outlined,
+                        prefixIcon: Icons.business_outlined,
                         validator: InputValidators.validateName,
                       ),
-                      const SizedBox(height: 25),
+                      SizedBox(height: screenHeight*0.03),
 
                       CustomWhiteTextField(
                         controller: _locationController,
                         hintText: 'Location eg..Cairo, Egypt',
-                        icon: Icons.map_outlined,
+                        prefixIcon: Icons.map_outlined,
                         validator: InputValidators.validateLocation,
                       ),
-                      const SizedBox(height: 25),
+                      SizedBox(height: screenHeight*0.03),
 
                       CustomWhiteTextField(
                         controller: _managerController,
                         hintText: 'Manager Name',
-                        icon: Icons.person_outline,
+                        prefixIcon: Icons.person_outline,
                         validator: InputValidators.validateManagerName,
                       ),
-                      const SizedBox(height: 25),
+                      SizedBox(height: screenHeight*0.03),
 
                       CustomWhiteTextField(
                         controller: _phoneController,
                         hintText: 'Phone',
-                        icon: Icons.phone_outlined,
+                        prefixIcon: Icons.phone_outlined,
                         validator: InputValidators.validatePhone,
                       ),
-                      const SizedBox(height: 50),
+                      SizedBox(height: screenHeight*0.06),
 
                       BlocBuilder<BranchBloc, BranchState>(
                         builder: (context, state) {
@@ -130,7 +132,7 @@ class _BranchScreenState extends State<BranchScreen> {
                           }
                           return CustomMainButton(
                             label: screenTitle,
-                            width: 220,
+                            width: screenWidth*0.6,
                             onPressed: () {
                               if (_formKey.currentState?.validate() ?? false) {
                                 if (widget.branch == null) {

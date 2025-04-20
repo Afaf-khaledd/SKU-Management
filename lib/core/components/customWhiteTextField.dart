@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:sku/core/utils/colors.dart';
 
 class CustomWhiteTextField extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
-  final IconData icon;
+  final IconData? prefixIcon;
+  final Widget? suffixIcon;
   final String? Function(String?)? validator;
 
   const CustomWhiteTextField({
     super.key,
     required this.controller,
     required this.hintText,
-    required this.icon,
+    this.prefixIcon,
+    this.suffixIcon,
     this.validator,
   });
 
@@ -21,9 +24,10 @@ class CustomWhiteTextField extends StatelessWidget {
       controller: controller,
       validator: validator,
       decoration: InputDecoration(
-        prefixIcon: Icon(icon, color: ColorsManager.subTextBlackColor),
+        prefixIcon: prefixIcon != null ? Icon(prefixIcon, color: ColorsManager.subTextBlackColor) : null,
+        suffixIcon: suffixIcon,
         hintText: hintText,
-        hintStyle: TextStyle(color: ColorsManager.subTextBlackColor),
+        hintStyle: GoogleFonts.poppins(color: ColorsManager.subTextBlackColor),
         filled: true,
         fillColor: Colors.white60,
         border: OutlineInputBorder(
@@ -36,7 +40,7 @@ class CustomWhiteTextField extends StatelessWidget {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(17),
-          borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 1.5),
+          borderSide: BorderSide(color: ColorsManager.primaryColor, width: 1.5),
         ),
       ),
     );

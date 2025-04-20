@@ -50,4 +50,28 @@ class InputValidators {
     }
     return null;
   }
+
+  static String? validateItemName(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Item name is required';
+    }
+    return null;
+  }
+  static String? validateItemBrand(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Item brand is required';
+    }
+    return null;
+  }
+  static String? validateItemCode(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Item code is required';
+    }
+    final RegExp regExp = RegExp(r'^SKU(\d{1,6})$');
+    if (!regExp.hasMatch(value)) {
+      return 'Code must start with "SKU" followed by numbers (0-999)';
+    }
+    return null;
+  }
+
 }

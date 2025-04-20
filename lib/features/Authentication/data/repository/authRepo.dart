@@ -17,10 +17,28 @@ class AuthRepository {
       throw Exception(e.message);
     }
   }
+  Future<User?> signup(String email, String password) async {
+    try {
+      final credential = await _firebaseAuth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      return credential.user;
+    } on FirebaseAuthException catch (e) {
+      throw Exception(e.message);
+    }
+  }
 
   Future<void> resetPassword(String email) async {
     try {
       await _firebaseAuth.sendPasswordResetEmail(email: email);
+    } on FirebaseAuthException catch (e) {
+      throw Exception(e.message);
+    }
+  }
+  Future<void> logout() async {
+    try {
+      await _firebaseAuth.signOut();
     } on FirebaseAuthException catch (e) {
       throw Exception(e.message);
     }

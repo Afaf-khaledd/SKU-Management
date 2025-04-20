@@ -10,14 +10,14 @@ import '../logic/auth_bloc.dart';
 import '../logic/auth_event.dart';
 import '../logic/auth_state.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -33,29 +33,13 @@ class _LoginScreenState extends State<LoginScreen> {
     if (_formKey.currentState!.validate()) {
       final email = emailController.text.trim();
       final password = passwordController.text.trim();
-      context.read<AuthBloc>().add(LoginRequested(email: email, password: password));
+      context.read<AuthBloc>().add(RegisterRequested(email: email, password: password));
     }
   }
-
-  void _resetPassword() {
-    final email = emailController.text.trim();
-    if (email.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please enter your email to reset password.')),
-      );
-    } else {
-      context.read<AuthBloc>().add(ResetPasswordRequested(email: email));
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('We’ve sent you a password reset email. Please check your inbox.')),
-      );
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-
     return Scaffold(
       body: SafeArea(
         child: BlocListener<AuthBloc, AuthState>(
@@ -79,7 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: [
                   SizedBox(height: screenHeight*0.2),
                   Text(
-                    'Access Account',
+                    'Welcome,',
                     style: GoogleFonts.poppins(
                       fontSize: screenWidth*0.06,
                       fontWeight: FontWeight.w700,
@@ -88,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   SizedBox(height: screenHeight*0.018),
                   Text(
-                    'Login to your admin account',
+                    'Create new Admin account',
                     style: GoogleFonts.poppins(
                       fontSize: screenWidth*0.04,
                       fontWeight: FontWeight.w400,
@@ -102,7 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     controller: emailController,
                     validator: InputValidators.validateEmail,
                   ),
-                  SizedBox(height: screenHeight*0.018),
+                  SizedBox(height: screenHeight*0.022),
                   CustomFormField(
                     hintText: 'Your password',
                     obscureText: true,
@@ -110,55 +94,36 @@ class _LoginScreenState extends State<LoginScreen> {
                     controller: passwordController,
                     validator: InputValidators.validatePassword,
                   ),
-                  Row(
-                    children: [
-                      const Spacer(),
-                      TextButton(
-                        onPressed: _resetPassword,
-                        style: TextButton.styleFrom(
-                          foregroundColor: ColorsManager.primaryColor,
-                        ),
-                        child: Text(
-                          "Forget your password?",
-                          style: GoogleFonts.poppins(
-                            fontSize: screenWidth*0.035,
-                            fontWeight: FontWeight.w400,
-                            color: ColorsManager.primaryColor,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: screenHeight*0.033),
+                  SizedBox(height: screenHeight*0.052),
                   BlocBuilder<AuthBloc, AuthState>(
                     builder: (context, state) {
                       return state is AuthLoading
-                          ? const CircularProgressIndicator(color: ColorsManager.primaryColor,)
+                          ? const CircularProgressIndicator(color:ColorsManager.primaryColor,)
                           : CustomMainButton(
-                        label: "Login",
+                        label: "Create Account",
                         onPressed: _submitForm,
                       );
                     },
                   ),
                   Center(
                     child: TextButton(
-                      onPressed: (){context.go('/register');},
+                      onPressed: (){context.go('/login');},
                       style: TextButton.styleFrom(
                         foregroundColor: ColorsManager.primaryColor,
                       ),
                       child: Text.rich(
                         TextSpan(
-                          text: "Don't have an account? ",
+                          text: "Already have an account?",
                           style: GoogleFonts.poppins(
-                            fontSize: screenWidth*0.035,
+                            fontSize: screenWidth*0.037,
                             fontWeight: FontWeight.w400,
                             color: ColorsManager.subTextBlackColor,
                           ),
                           children: [
                             TextSpan(
-                              text: 'Sign up.',
+                              text: 'Login.',
                               style: GoogleFonts.poppins(
-                                fontSize: screenWidth*0.033,
+                                fontSize: screenWidth*0.035,
                                 fontWeight: FontWeight.w500,
                                 color: ColorsManager.primaryColor, // Highlighted color
                               ),

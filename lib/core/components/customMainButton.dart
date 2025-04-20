@@ -12,7 +12,7 @@ class CustomMainButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(right: 13.0,left: 13,bottom: 40,),
+      padding: const EdgeInsets.only(right: 13.0,left: 13,bottom: 10,),
       child: SizedBox(
         width: width,
         height: 52,
@@ -29,7 +29,7 @@ class CustomMainButton extends StatelessWidget {
           child: Text(
             label,
             style: GoogleFonts.poppins(
-              fontSize: 18,
+              fontSize: MediaQuery.of(context).size.width*0.05,
               fontWeight: FontWeight.w600,
               color: Colors.white,
             ),

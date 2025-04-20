@@ -49,6 +49,12 @@ class BranchBloc extends Bloc<BranchEvent, BranchState> {
   Future<void> _onDeleteBranch(DeleteBranch event, Emitter<BranchState> emit) async {
     try {
       await branchRepository.deleteBranch(event.id);
+      final stream = branchRepository.getBranches();
+      await emit.forEach<List<BranchModel>>(
+        stream,
+        onData: (branches) => BranchLoaded(branches),
+        onError: (_, __) => BranchError("Failed to fetch branches."),
+      );
       emit(BranchOperationSuccess());
     } catch (e) {
       emit(BranchError(e.toString()));

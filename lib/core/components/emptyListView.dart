@@ -15,17 +15,17 @@ class EmptyListView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Icon(icon, size: 100, color: Colors.grey),
-          const SizedBox(height: 20),
+          Icon(icon, size: MediaQuery.of(context).size.width*0.2, color: Colors.grey),
+          SizedBox(height: MediaQuery.of(context).size.height*0.02),
           Text(
             title,
-            style: GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.w500),
+            style: GoogleFonts.poppins(fontSize: MediaQuery.of(context).size.width*0.065, fontWeight: FontWeight.w500),
           ),
-          const SizedBox(height: 10),
+          SizedBox(height: MediaQuery.of(context).size.height*0.01),
           Text(
             desc,
             textAlign: TextAlign.center,
-            style: GoogleFonts.poppins(fontSize: 15, fontWeight: FontWeight.w400,color: ColorsManager.subTextBlackColor),
+            style: GoogleFonts.poppins(fontSize: MediaQuery.of(context).size.width*0.04, fontWeight: FontWeight.w400,color: ColorsManager.subTextBlackColor),
           ),
         ],
       ),
